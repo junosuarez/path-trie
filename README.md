@@ -1,5 +1,5 @@
 # path-trie
-data store for path-addressable resources
+data structure for path-addressable resources
 
 ## usage
 
