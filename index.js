@@ -1,3 +1,5 @@
+var _ = require('funderscore')
+
 // type Trie := Object returned from
 //    returned from function Trie
 // type Path := String | Array<String>
@@ -5,25 +7,10 @@
 
 // (dictionary: Dictionary<String, Value>) => Trie
 
-function trie(dictionary){
-  return reduce(dictionary, function(t, val, key) {
+function trie(dictionary) {
+  return _.reduce(dictionary, function(t, val, key) {
     return put.call(t, key, val)
   })
-}
-
-// (path: String) => Array<String>
-// splits a `/`-delimited path into segments
-function splitPath(path) {
-  if (Array.isArray(path)) {
-    return path
-  }
-  if (path[0] === '/') {
-    path = path.substr(1)
-  }
-  if (path[path.length-1] === '/') {
-    path = path.substr(0, path.length-1)
-  }
-  return path.split('/')
 }
 
 // (this: Trie, path: Path, val: Value) => Trie
@@ -60,46 +47,32 @@ function del(path) {
 function flatten(trie, from) {
   from = from || []
 
-  return reduce(trie, function (dict, subtrie, seg) {
+  return _.reduce(trie, function (dict, subtrie, seg) {
     if (seg === '@') {
-      return keyValPair(from.join('/'), subtrie)
+      return _.pair(from.join('/'), subtrie)
     }
-    return concat(dict, flatten(subtrie, from.concat(seg)))
+    return _.concat(dict, flatten(subtrie, from.concat(seg)))
   })
 }
 
-function keyValPair(key, val) {
-  var o = {}
-  o[key] = val
-  return o
-}
-
-function map(obj, fn) {
-  var o = {}
-  for (var k in obj) {
-    o[k] = fn(obj[k], k)
+// (path: String) => Array<String>
+// splits a `/`-delimited path into segments
+function splitPath(path) {
+  if (Array.isArray(path)) {
+    return path
   }
-  return o
-}
-
-function reduce(obj, fn, seed) {
-  var val = seed || {}
-  for (var k in obj) {
-    val = fn(val, obj[k], k)
+  if (path[0] === '/') {
+    path = path.substr(1)
   }
-  return val
-}
-
-function concat(objA, objB) {
-  for (var k in objB) {
-    objA[k] = objB[k]
+  if (path[path.length-1] === '/') {
+    path = path.substr(0, path.length-1)
   }
-  return objA
+  return path.split('/')
 }
 
 module.exports = trie
-module.exports._splitPath = splitPath
 module.exports.put = put
 module.exports.get = get
 module.exports.del = del
 module.exports.flatten = flatten
+module.exports._splitPath = splitPath

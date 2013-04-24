@@ -1,6 +1,6 @@
 {
   "name": "path-trie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "data structure for path-addressable resources",
   "main": "index.js",
   "scripts": {
@@ -12,5 +12,8 @@
   "devDependencies": {
     "chai": "~1.5.0",
     "mocha": "~1.9.0"
+  },
+  "dependencies": {
+    "funderscore": "~0.1.0"
   }
 }
