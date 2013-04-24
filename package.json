@@ -1,0 +1,16 @@
+{
+  "name": "path-trie",
+  "version": "0.1.0",
+  "description": "data structure for path-addressable resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "repository": "git@github.com:jden/path-trie.git",
+  "author": "jden <jason@denizac.org>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "~1.5.0",
+    "mocha": "~1.9.0"
+  }
+}
